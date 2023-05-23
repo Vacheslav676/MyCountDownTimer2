@@ -6,10 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <RelativeLayout
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
+
+        <EditText
             android:id="@+id/tv_timer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -17,16 +18,14 @@
             android:text="00:00"
             android:layout_centerInParent="true"/>
 
-
-        <TextView
+        <EditText
             android:id="@+id/tv_duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_timer"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="236dp"
+            android:textSize="24sp"
             android:text="Duration in seconds"
-            android:textSize="24sp" />
+            android:layout_below="@id/tv_timer"
+            android:layout_centerHorizontal="true"/>
 
         <Button
             android:id="@+id/btn_start"
