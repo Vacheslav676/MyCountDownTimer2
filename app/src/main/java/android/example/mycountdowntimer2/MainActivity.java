@@ -7,16 +7,17 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView tvTimer;
+    private TextView tvTimer, tvDuration;
     private Button btnStart, btnPause;
     private CountDownTimer countDownTimer;
-    private long totalTimeInMillis = 60000; // 1 minute
-    private long timeLeftInMillis = totalTimeInMillis;
+    private long totalTimeInMillis;
+    private long timeLeftInMillis;
     private boolean timerRunning;
 
     @Override
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         tvTimer = findViewById(R.id.tv_timer);
+        tvDuration = findViewById(R.id.tv_duration);
         btnStart = findViewById(R.id.btn_start);
         btnPause = findViewById(R.id.btn_pause);
 
@@ -45,6 +47,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void startTimer() {
         if (!timerRunning) {
+            String durationString = tvDuration.getText().toString().trim();
+            if (durationString.isEmpty() || durationString.equals("Duration in seconds")) {
+                Toast.makeText(this, "Please enter a duration", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            int durationInSeconds = Integer.parseInt(durationString);
+            totalTimeInMillis = durationInSeconds * 1000;
+            timeLeftInMillis = totalTimeInMillis;
+
             countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
                 @Override
                 public void onTick(long millisUntilFinished) {
